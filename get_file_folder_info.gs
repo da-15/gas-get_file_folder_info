@@ -8,6 +8,9 @@ function onOpen(){
   SpreadsheetApp.getActiveSpreadsheet().addMenu("スクリプト",myMenu);
 }
 
+/*
+ * ダイアログに指定された、GDriveフォルダ内にあるファイル/フォルダ情報を取得する
+ */
 function getFileInfo() {
     var files;
     var file;
@@ -34,21 +37,19 @@ function getFileInfo() {
     sh.getRange(1, 3).setValue('Name');
     
     
+    // 取得したファイル情報を書き出し
     for(i = 2; files.hasNext(); i++) {
-        // 取得したファイル情報を書き出し
         file = files.next();
         sh.getRange(i, 1).setValue('');
         sh.getRange(i, 2).setValue(file.getId());
         sh.getRange(i, 3).setValue(file.getName());
     }
     
+    // 取得したフォルダ情報を書き出し
     for(; folders.hasNext(); i++){
-        // 取得したフォルダ情報を書き出し
         folder = folders.next();
-        sh.getRange(i, 1).setValue('●');
+        sh.getRange(i, 1).setValue('d');
         sh.getRange(i, 2).setValue(folder.getId());
         sh.getRange(i, 3).setValue(folder.getName());
     }
-
-
 }
